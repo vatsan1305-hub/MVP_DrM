@@ -51,7 +51,7 @@ export const primaryCta = { label: "Book a consultation", href: "#contact" } as 
 // ── Companion (demo) ─────────────────────────────────────────────────────────
 // The AWS Lambda Function URL (see lambda/README.md). While it is still the
 // placeholder, /companion/ shows a "being set up" state instead of the chat.
-export const companionEndpoint: string = "REPLACE_WITH_LAMBDA_FUNCTION_URL";
+export const companionEndpoint: string = "https://omc3dw3zd2jglkhqwgoewcabr40rduad.lambda-url.eu-north-1.on.aws/";
 
 /** False until companionEndpoint is a real https:// URL. */
 export const companionReady = companionEndpoint.startsWith("https://");
