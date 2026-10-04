@@ -38,13 +38,13 @@ app/
   layout.tsx            Root layout: fonts, noindex metadata, header/footer, mobile CTA bar
   page.tsx              Home (content.md §1)
   authors-shelf/page.tsx Author's Shelf (content.md §2)
-  globals.css           Tailwind import, palette tokens, type scale, fade-in rules
+  globals.css           Tailwind import, palette tokens, type scale, scroll-driven motion
 components/
   Header.tsx            Logo, nav, CTA, mobile full-screen overlay menu (client)
   Footer.tsx            Contact details + Tele-MANAS safety line (id="contact")
-  MobileCtaBar.tsx      Sticky Call / WhatsApp / Email bar (mobile only)
+  MobileCtaBar.tsx      Sticky Call / WhatsApp / Email bar (mobile only, shown after the hero)
   Faq.tsx               Accessible accordion (client)
-  Reveal.tsx            IntersectionObserver fade-in on section entry (client)
+  Reveal.tsx            IntersectionObserver fallback for scroll reveals (client)
   Section.tsx, Img.tsx, JsonLd.tsx, Todo.tsx
 lib/
   site.ts               Contact details, nav, base-path helper — single source

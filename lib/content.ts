@@ -64,10 +64,9 @@ export const home = {
   hero: {
     eyebrow: "Psychologist · Author · Kokapet, Hyderabad",
     h1: "Couple Therapy in Hyderabad",
-    subhead: "Relationships are learned. So is finding your way back.",
-    body: "For 28 years, I've sat with couples at the moments that matter — before the wedding, after the distance, and everywhere in between. I'm Dr. P. Madhurima Reddy, and I'd like to help you understand what's happening between you, and what you can do about it.",
+    subhead: "For 28 years, I've sat with couples at the moments that matter.",
     cta: "Book a consultation",
-    secondary: "Meet Dr. Madhurima →",
+    secondary: "Meet Dr. Madhurima ›",
     image: images.portrait,
   },
   trust: [
@@ -75,22 +74,22 @@ export const home = {
     "Zee Telugu News Achievers Award 2025 — Health & Wellness",
     "Author of two books",
   ],
+  statement: ["Relationships are learned.", "So is finding your way back."],
   couple: {
     h2: "When two people stop understanding each other",
     answer:
       "Couple therapy is a structured space where both partners talk, listen and understand the patterns between them — with a psychologist guiding the conversation.",
-    body: "Most couples who come to me aren't in crisis. They're tired. The same argument keeps returning in a new form, or the closeness that used to be easy now takes effort. Therapy gives you a place to slow that down, see it clearly, and choose differently.",
     cards: [
       {
         title: "Pre-marital counselling",
-        body: "Before the wedding: expectations, families, money, conflict. The conversations that are easier to have now than later.",
+        body: "Before the wedding: expectations, families, money, conflict.",
       },
       {
         title: "Marriage counselling",
-        body: "For couples who want to rebuild trust, communication or closeness — whether you've been married two years or twenty.",
+        body: "Rebuild trust, communication or closeness — whether you've been married two years or twenty.",
       },
     ],
-    cta: "Book a couple consultation",
+    cta: "Book a couple consultation ›",
   },
   other: {
     h2: "Beyond couple therapy",
@@ -101,36 +100,44 @@ export const home = {
       },
       {
         title: "Life coaching",
-        body: "Goal-focused sessions for clarity, confidence and direction. Kept separate from therapy.",
+        body: "Clarity, confidence and direction. Kept separate from therapy.",
       },
       {
         title: "Corporate wellness",
-        body: "Workshops and talks for teams and HR leaders on stress, communication and emotional intelligence.",
+        body: "Workshops and talks for teams on stress, communication and emotional intelligence.",
       },
     ],
   },
   about: {
     h2: "Meet Dr. P. Madhurima Reddy",
-    body: "I've spent 28 years teaching, counselling and coaching — first as a trainer, then as a psychologist. I founded La Winspire in Hyderabad to bring that work under one roof: therapy for couples and individuals, coaching for people ready to grow, and programmes for organisations. I write, I teach, and I still believe the most important work happens in a quiet room, one honest conversation at a time.",
+    beats: [
+      "I've spent 28 years teaching, counselling and coaching — first as a trainer, then as a psychologist.",
+      "I founded La Winspire in Hyderabad to bring that work under one roof.",
+      // Pull-quote
+      "I still believe the most important work happens in a quiet room, one honest conversation at a time.",
+    ],
     image: images.full,
   },
   recognition: {
     h2: "Recognised for work in health & wellness",
     // [CONFIRM wording] — content.md §4.2
-    body: "In 2025, Dr. Madhurima received the Zee Telugu News Achievers Award in the Health & Wellness category, presented by former Vice President of India Shri M. Venkaiah Naidu.",
+    caption:
+      "Zee Telugu News Achievers Award 2025, Health & Wellness — presented by former Vice President of India Shri M. Venkaiah Naidu.",
     image: images.award,
   },
   workshops: {
     h2: "Learning together",
-    body: "Alongside one-to-one work, I run group workshops on communication, emotional mastery and wellbeing — for organisations, colleges and communities.",
+    caption:
+      "Group workshops on communication, emotional mastery and wellbeing — for organisations, colleges and communities.",
     image: images.workshop,
   },
   books: {
     h2: "From the author",
-    body: "Two books, written from years of practice — one on the power of belief and intention, one on understanding and mastering your emotions.",
+    body: "Two books, written from years of practice.",
     covers: [images.awakening, images.emotionalMastery],
-    link: "Visit the Author's Shelf →",
+    link: "Visit the Author's Shelf ›",
   },
+  faqHeading: "FAQ",
   faq: [
     {
       q: "What is couple therapy?",
@@ -156,7 +163,7 @@ export const home = {
   closing: {
     h2: "Start with one conversation",
     body: "Call, message or email — we'll find a time that works for you.",
-    cta: "Book a consultation",
+    buttons: { call: "Call", whatsapp: "WhatsApp", email: "Email" },
   },
 };
 
@@ -169,20 +176,21 @@ export const shelf = {
   },
   intro: {
     h1: "Books by Dr. P. Madhurima Reddy",
-    body: "Writing lets me reach people I'll never sit across from. Both books come from the same place as my practice — years of listening to people describe what holds them back, and what finally helped them move.",
+    body: "Writing lets me reach people I'll never sit across from.",
   },
   awakening: {
     h2: "The Awakening",
     image: images.awakening,
-    body: "Part personal story, part practical guide. The first half traces my own journey into the Law of Attraction; the second turns it into a working method for health, career, prosperity and happiness. Eleven chapters, around 280 pages.",
+    body: "Part personal story, part practical guide — my own journey into the Law of Attraction, turned into a working method for health, career, prosperity and happiness.",
+    detail: "Eleven chapters, around 280 pages.",
     note: "A coaching and self-development title — not a therapy book.",
-    cta: "Buy on Amazon →",
+    cta: "Buy on Amazon ›",
     url: "https://www.amazon.in/Awakening-Dr-P-Madhurima-Reddy-ebook/dp/B0BPXSC18M/ref=tmm_kin_swatch_0",
   },
   emotionalMastery: {
     h2: "Emotional Mastery: Master Yourself to Master the World",
     image: images.emotionalMastery,
-    body: "A practical guide to emotional intelligence — how emotions work, why they matter, and how to work with them instead of against them.",
+    body: "A practical guide to emotional intelligence — how to work with your emotions instead of against them.",
     learnHeading: "What you'll learn:",
     learn: [
       "How emotions work, and why they take over",
@@ -190,14 +198,15 @@ export const shelf = {
       "Building empathy and stronger relationships",
       "Using emotional intelligence at work and in leadership",
     ],
-    cta: "Buy on Amazon →",
+    cta: "Buy on Amazon ›",
     url: "https://www.amazon.in/dp/B0CSZ3R7SK?bestFormat=true",
   },
   author: {
     h2: "About the author",
     body: "Dr. P. Madhurima Reddy is a psychologist with 28 years in practice and the founder of La Winspire in Kokapet, Hyderabad. She works with couples, individuals and organisations, and received the Zee Telugu News Achievers Award 2025 for Health & Wellness.",
-    link: "Book a consultation",
+    link: "Book a consultation ›",
   },
+  faqHeading: "FAQ",
   faq: [
     {
       q: "Where can I buy Dr. Madhurima's books?",

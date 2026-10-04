@@ -16,12 +16,13 @@
   --font-sans: var(--font-figtree), system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --ease-whisper: cubic-bezier(0, 0, 0.2, 1);
+  --ease-rise: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 4.5rem; /* 52px header + breathing room */
     -webkit-text-size-adjust: 100%;
   }
 
@@ -30,40 +31,26 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 1.0625rem; /* 17px mobile */
-    line-height: 1.65;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    overflow-x: clip; /* guards against stray horizontal scroll; unlike hidden, keeps position: sticky working */
   }
 
   @media (min-width: 768px) {
     body {
-      font-size: 1.125rem; /* 18px desktop */
+      font-size: 1.1875rem; /* 19px desktop */
     }
   }
 
+  /* Figtree headings everywhere; Fraunces is opt-in (hero H1, statement, pull-quotes). */
   h1,
   h2,
   h3 {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    color: var(--color-ink);
-    text-wrap: balance;
-  }
-
-  h1 {
-    font-size: clamp(2.5rem, 2rem + 3.2vw, 4.5rem); /* 40 → 72px */
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.025em;
     line-height: 1.08;
-    letter-spacing: -0.015em;
-  }
-
-  h2 {
-    font-size: clamp(1.75rem, 1.4rem + 1.3vw, 2.5rem); /* 28 → 40px */
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-  }
-
-  h3 {
-    font-size: 1.375rem;
-    line-height: 1.3;
+    text-wrap: balance;
   }
 
   p {
@@ -78,7 +65,7 @@
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 4px;
   }
 
   img {
@@ -87,19 +74,193 @@
   }
 }
 
-/* One-direction fade-in on section entry. Only active once JS has added
-   the `js` class, so content is never hidden without JavaScript. */
-html.js [data-reveal] {
-  opacity: 0;
-  transform: translateY(12px);
-  transition:
-    opacity 300ms var(--ease-whisper),
-    transform 300ms var(--ease-whisper);
+@layer components {
+  /* Type scale (CLAUDE.md → Design doctrine). */
+  .type-hero {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(3rem, 8vw, 8rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+
+  .type-statement {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .type-h2 {
+    font-size: clamp(2.25rem, 4.5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .type-h3 {
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .type-lead {
+    font-size: clamp(1.25rem, 1rem + 0.9vw, 1.75rem);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+  }
+
+  .type-quote {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .eyebrow {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Dark sections: ink background, bg text. Accent text fails AA on ink,
+     so links and focus rings switch to accent-soft. */
+  .on-dark {
+    background: var(--color-ink);
+    color: var(--color-bg);
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-accent-soft);
+  }
 }
 
-html.js [data-reveal].is-visible {
-  opacity: 1;
-  transform: none;
+/* Mobile CTA bar: hidden (and out of the tab order) until the hero has
+   scrolled past. Needs JS, so without it the bar is always visible. */
+.cta-bar {
+  transition:
+    transform 300ms var(--ease-whisper),
+    visibility 300ms;
+}
+
+html.js .cta-bar[data-shown="false"] {
+  transform: translateY(100%);
+  visibility: hidden;
+}
+
+/* ── Motion ────────────────────────────────────────────────────────────────
+   All motion is opt-in under prefers-reduced-motion: no-preference, so with
+   reduced motion (or without JS for the fallback) everything is static and
+   fully visible. */
+
+/* Hero headline: line-by-line reveal on load (2 × 600ms, 150ms stagger,
+   supporting copy fades in by 900ms total). */
+.hero-line {
+  display: block;
+}
+
+@keyframes line-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.3em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Transform only, so the hero portrait (the LCP image) is never transparent. */
+@keyframes lift {
+  from {
+    transform: translateY(56px) scale(0.94);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-line {
+    animation: line-in 600ms var(--ease-rise) both;
+  }
+
+  .hero-line + .hero-line {
+    animation-delay: 150ms;
+  }
+
+  .hero-after {
+    animation: fade-in 300ms var(--ease-whisper) 600ms both;
+  }
+
+  /* Scroll-linked reveals. [data-reveal] = fade + rise; "late" starts a beat
+     later (second half of a statement); "lift" = transform only. */
+  @supports (animation-timeline: view()) {
+    [data-reveal] {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 30%;
+    }
+
+    [data-reveal="late"] {
+      animation-range: entry 45% cover 42%;
+    }
+
+    [data-reveal="lift"] {
+      animation-name: lift;
+      animation-range: entry 0% cover 45%;
+    }
+  }
+
+  /* Fallback: IntersectionObserver (components/Reveal.tsx) adds .is-visible. */
+  @supports not (animation-timeline: view()) {
+    html.js [data-reveal] {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 700ms var(--ease-rise),
+        transform 700ms var(--ease-rise);
+    }
+
+    html.js [data-reveal="late"] {
+      transition-delay: 250ms;
+    }
+
+    html.js [data-reveal="lift"] {
+      opacity: 1;
+      transform: translateY(48px) scale(0.95);
+    }
+
+    html.js [data-reveal].is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -107,16 +268,10 @@ html.js [data-reveal].is-visible {
     scroll-behavior: auto;
   }
 
-  html.js [data-reveal] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
   *,
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
+    animation: none !important;
   }
 }

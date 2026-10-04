@@ -39,7 +39,7 @@ function NavLink({
  */
 function Logo() {
   return (
-    <span className="relative block aspect-[258/146] h-12 overflow-hidden md:h-14">
+    <span className="relative block aspect-[258/146] h-9 overflow-hidden">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={asset("/images/logo.webp")}
@@ -109,31 +109,41 @@ export default function Header() {
   const isCurrent = (href: string) => href === pathname || (href !== "/" && pathname.startsWith(href));
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-surface">
+    <header className="sticky top-0 z-40">
+      {/* Translucent bar. The blur lives on this layer, not the header, because
+          backdrop-filter would make the full-screen menu below position
+          relative to the header instead of the viewport. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 border-b border-line/80 bg-bg/72 backdrop-blur-[20px] backdrop-saturate-[1.8]"
+      />
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-surface focus:px-4 focus:py-2"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-full focus:bg-surface focus:px-4 focus:py-2 focus:text-sm"
       >
         Skip to content
       </a>
-      <div className={`${container} flex h-18 items-center justify-between gap-6 md:h-20`}>
+      <div className={`${container} relative flex h-13 items-center justify-between gap-6`}>
         <Link href="/" aria-label={`${site.brand} — Home`} className="relative z-50 shrink-0">
           <Logo />
         </Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Main" className="hidden items-center gap-7 md:flex">
           <ul className="flex items-center gap-7">
             {nav.map((item) => (
               <li key={item.href}>
                 <NavLink
                   {...item}
                   current={isCurrent(item.href)}
-                  className="text-[1rem] text-ink-2 transition-colors duration-150 ease-out hover:text-accent aria-[current=page]:text-ink aria-[current=page]:underline aria-[current=page]:decoration-accent aria-[current=page]:underline-offset-8"
+                  className="text-[0.875rem] text-ink underline-offset-[6px] transition-colors duration-150 ease-out hover:text-accent aria-[current=page]:underline aria-[current=page]:decoration-accent"
                 />
               </li>
             ))}
           </ul>
-          <a href={primaryCta.href} className={`${btnPrimary} min-h-11 px-6 py-2.5 text-[1rem]`}>
+          <a
+            href={primaryCta.href}
+            className="inline-flex min-h-8 items-center rounded-full bg-accent px-4 py-1 text-[0.875rem] font-medium text-surface transition-colors duration-150 ease-out hover:bg-ink"
+          >
             {primaryCta.label}
           </a>
         </nav>
@@ -165,7 +175,7 @@ export default function Header() {
         aria-modal="true"
         aria-label="Menu"
         hidden={!open}
-        className="fixed inset-0 z-40 overflow-y-auto bg-bg pt-24 md:hidden"
+        className="fixed inset-0 z-40 overflow-y-auto bg-bg pt-20 md:hidden"
       >
         <nav aria-label="Mobile" className={`${container} flex min-h-full flex-col pb-10`}>
           <ul className="border-t border-line">
@@ -175,7 +185,7 @@ export default function Header() {
                   {...item}
                   current={isCurrent(item.href)}
                   onClick={() => close(false)}
-                  className="block py-5 font-serif text-3xl text-ink aria-[current=page]:text-accent"
+                  className="block py-5 text-[2rem] font-semibold tracking-[-0.025em] text-ink aria-[current=page]:text-accent"
                 />
               </li>
             ))}

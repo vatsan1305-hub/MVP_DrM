@@ -29,21 +29,33 @@ Read this before changing anything. These rules apply to every session.
 - After every build: `grep -L 'noindex' $(find out -name '*.html')` must print nothing.
 - Only a deliberate, human-approved production launch may change this.
 
-## Design doctrine — warm-therapeutic, premium, author-led
-- Palette (Tailwind tokens in `app/globals.css`, nothing else):
+## Design doctrine — apple.com-style storytelling, warm & premium, author-led
+One idea per screen, big confident type, dramatic changes of scale, light/dark contrast,
+scroll-driven storytelling, very little copy. Warm and premium — a therapist-author, not a
+tech launch.
+- Palette unchanged (Tailwind tokens in `app/globals.css`, nothing else):
   bg `#FAF9F5`, surface `#FFFFFF`, ink `#1A1A1A`, ink-2 `#4A4A4A`, accent `#B8501A`,
   accent-soft `#E9C9B2`, line `#D9D6CE`. No gradients, no bright primaries.
   Never put accent text on accent-soft (fails AA).
-- Fonts: Fraunces (headings, 400–600) and Figtree (body, 400/500) via next/font/google.
-- Type: H1 48–72px desktop, H2 32–40px, body 17–19px (never < 16px mobile), line-height 1.6–1.7.
-- Sections: 80–120px vertical padding on desktop; alternate bg / surface backgrounds.
-- Editorial layout: alternating left/right text + image blocks. No sidebars, no stock-photo
-  clichés, no icons-in-circles grids.
-- Motion that whispers: CTA hover colour shift 150ms ease-out; one-direction fade-in on
-  section entry (max 300ms, no bounce); respect prefers-reduced-motion. No parallax, no
-  animated hero text, no animation libraries.
+- Dark sections use ink `#1A1A1A` as background with bg `#FAF9F5` text. Accent stays
+  `#B8501A` for fills; accent text on ink fails AA, so use accent-soft `#E9C9B2` for accent
+  text on dark.
+- Fonts (via next/font/google): Fraunces ONLY for the hero H1, the giant statement band and
+  pull-quotes. Figtree for everything else, including H2/H3, nav and buttons. Figtree
+  headings: weight 600, letter-spacing -0.02em to -0.03em, line-height 1.05–1.1.
+- Type scale: hero H1 `clamp(3rem, 8vw, 8rem)`; statement band `clamp(2.5rem, 6vw, 6rem)`;
+  section H2 `clamp(2.25rem, 4.5vw, 4rem)`; body 17–19px, never below 16px on mobile.
+- Layout: one idea per screen. Centred hero. Vary section scale on purpose. Bento tile grids
+  allowed. No sidebars, no stock-photo clichés, no icons-in-circles.
+- Motion (restrained): scroll-linked fades/rises, one sticky scrollytelling section, hero
+  headline reveal on load (line by line, ≤ 900ms total). Use CSS scroll-driven animations
+  (`animation-timeline: view()`) with an IntersectionObserver fallback. No animation
+  libraries, no parallax backgrounds, no scroll-jacking, no autoplay video. Everything must
+  fully respect prefers-reduced-motion (static, fully visible content).
+- Images: never render a photo larger than its native pixel width. Prefer framed, rounded
+  (16–24px) image tiles over full-bleed until hi-res originals arrive.
 - Mobile: full-screen overlay menu, accessible FAQ accordion, sticky bottom Call / WhatsApp /
-  Email bar.
+  Email bar that appears only after the hero has scrolled past and never covers content.
 
 ## Accessibility & performance
 - Semantic landmarks, one H1 per page, WCAG AA contrast, visible focus, full keyboard support.
