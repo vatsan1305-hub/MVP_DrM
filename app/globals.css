@@ -153,6 +153,79 @@ html.js .cta-bar[data-shown="false"] {
   visibility: hidden;
 }
 
+/* ── Companion (/companion/) ─────────────────────────────────────────────── */
+
+/* No mobile CTA bar on the Companion page, so no padding reserved for it. */
+body:has([data-companion]) {
+  padding-bottom: 0;
+}
+
+/* Thinking indicator: static "Reflecting…" by default (and under reduced
+   motion); dots + a soft pulse only with motion allowed. */
+.thinking-dots {
+  display: none;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes reply-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .thinking-dots {
+    display: inline-flex;
+  }
+
+  .thinking-dots > span {
+    animation: breathe 1.4s ease-in-out infinite both;
+  }
+
+  .thinking-dots > span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .thinking-dots > span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  .thinking-text {
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+
+  /* New replies fade and rise in gently. */
+  .reply-in {
+    animation: reply-rise 500ms var(--ease-rise) both;
+  }
+}
+
 /* ── Motion ────────────────────────────────────────────────────────────────
    All motion is opt-in under prefers-reduced-motion: no-preference, so with
    reduced motion (or without JS for the fallback) everything is static and

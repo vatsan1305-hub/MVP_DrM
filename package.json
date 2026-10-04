@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "npx serve out",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test:lambda": "node lambda/test.mjs",
+    "check:guardrails": "node scripts/guardrails.mjs",
+    "sync:guardrails": "node scripts/guardrails.mjs --write"
   },
   "dependencies": {
     "next": "^16.3.8",

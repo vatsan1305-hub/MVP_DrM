@@ -38,6 +38,7 @@ app/
   layout.tsx            Root layout: fonts, noindex metadata, header/footer, mobile CTA bar
   page.tsx              Home (content.md §1)
   authors-shelf/page.tsx Author's Shelf (content.md §2)
+  companion/page.tsx    Companion AI demo (content.md §3) — UI in components/Companion.tsx
   globals.css           Tailwind import, palette tokens, type scale, scroll-driven motion
 components/
   Header.tsx            Logo, nav, CTA, mobile full-screen overlay menu (client)
@@ -66,3 +67,16 @@ CLAUDE.md               Rules for future sessions
 Push to `main` (or run the workflow manually). In the repo settings, set
 **Pages → Source** to **GitHub Actions**. The site is served at
 `https://vatsan1305-hub.github.io/MVP_DrM/`.
+
+## Companion (AI demo)
+
+`/companion/` is a static page that talks to a separate AWS Lambda (`lambda/index.mjs`,
+pasted into the AWS console — see `lambda/README.md` for every setting). Until
+`companionEndpoint` in `lib/site.ts` is set to the Function URL, the page shows a
+"being set up" state.
+
+```bash
+npm run test:lambda       # Lambda handler tests (fetch mocked, no key needed)
+npm run check:guardrails  # lambda system prompt == guardrails.md
+npm run sync:guardrails   # copy guardrails.md into the lambda
+```

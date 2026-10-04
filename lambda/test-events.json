@@ -1,0 +1,157 @@
+{
+  "_readme": "Paste ONE event (the value, not the key) into the Lambda console Test tab. Replace REPLACE_WITH_YOUR_DEMO_PASSCODE with your DEMO_PASSCODE, and make 'origin' equal ALLOWED_ORIGIN. Expected results are in lambda/README.md.",
+  "normal": {
+    "version": "2.0",
+    "routeKey": "$default",
+    "rawPath": "/",
+    "rawQueryString": "",
+    "headers": {
+      "origin": "https://vatsan1305-hub.github.io",
+      "content-type": "application/json",
+      "x-demo-passcode": "REPLACE_WITH_YOUR_DEMO_PASSCODE"
+    },
+    "requestContext": {
+      "http": {
+        "method": "POST",
+        "path": "/",
+        "protocol": "HTTP/1.1",
+        "sourceIp": "203.0.113.1",
+        "userAgent": "test"
+      }
+    },
+    "body": "{\"messages\": [{\"role\": \"user\", \"content\": \"We keep having the same argument\"}]}",
+    "isBase64Encoded": false
+  },
+  "verify": {
+    "version": "2.0",
+    "routeKey": "$default",
+    "rawPath": "/",
+    "rawQueryString": "",
+    "headers": {
+      "origin": "https://vatsan1305-hub.github.io",
+      "content-type": "application/json",
+      "x-demo-passcode": "REPLACE_WITH_YOUR_DEMO_PASSCODE"
+    },
+    "requestContext": {
+      "http": {
+        "method": "POST",
+        "path": "/",
+        "protocol": "HTTP/1.1",
+        "sourceIp": "203.0.113.1",
+        "userAgent": "test"
+      }
+    },
+    "body": "{\"verify\": true}",
+    "isBase64Encoded": false
+  },
+  "wrongPasscode": {
+    "version": "2.0",
+    "routeKey": "$default",
+    "rawPath": "/",
+    "rawQueryString": "",
+    "headers": {
+      "origin": "https://vatsan1305-hub.github.io",
+      "content-type": "application/json",
+      "x-demo-passcode": "wrong-passcode"
+    },
+    "requestContext": {
+      "http": {
+        "method": "POST",
+        "path": "/",
+        "protocol": "HTTP/1.1",
+        "sourceIp": "203.0.113.1",
+        "userAgent": "test"
+      }
+    },
+    "body": "{\"messages\": [{\"role\": \"user\", \"content\": \"Hello\"}]}",
+    "isBase64Encoded": false
+  },
+  "badOrigin": {
+    "version": "2.0",
+    "routeKey": "$default",
+    "rawPath": "/",
+    "rawQueryString": "",
+    "headers": {
+      "origin": "https://example.com",
+      "content-type": "application/json",
+      "x-demo-passcode": "REPLACE_WITH_YOUR_DEMO_PASSCODE"
+    },
+    "requestContext": {
+      "http": {
+        "method": "POST",
+        "path": "/",
+        "protocol": "HTTP/1.1",
+        "sourceIp": "203.0.113.1",
+        "userAgent": "test"
+      }
+    },
+    "body": "{\"messages\": [{\"role\": \"user\", \"content\": \"Hello\"}]}",
+    "isBase64Encoded": false
+  },
+  "crisis": {
+    "version": "2.0",
+    "routeKey": "$default",
+    "rawPath": "/",
+    "rawQueryString": "",
+    "headers": {
+      "origin": "https://vatsan1305-hub.github.io",
+      "content-type": "application/json",
+      "x-demo-passcode": "REPLACE_WITH_YOUR_DEMO_PASSCODE"
+    },
+    "requestContext": {
+      "http": {
+        "method": "POST",
+        "path": "/",
+        "protocol": "HTTP/1.1",
+        "sourceIp": "203.0.113.1",
+        "userAgent": "test"
+      }
+    },
+    "body": "{\"messages\": [{\"role\": \"user\", \"content\": \"I feel like I want to kill myself\"}]}",
+    "isBase64Encoded": false
+  },
+  "tooLong": {
+    "version": "2.0",
+    "routeKey": "$default",
+    "rawPath": "/",
+    "rawQueryString": "",
+    "headers": {
+      "origin": "https://vatsan1305-hub.github.io",
+      "content-type": "application/json",
+      "x-demo-passcode": "REPLACE_WITH_YOUR_DEMO_PASSCODE"
+    },
+    "requestContext": {
+      "http": {
+        "method": "POST",
+        "path": "/",
+        "protocol": "HTTP/1.1",
+        "sourceIp": "203.0.113.1",
+        "userAgent": "test"
+      }
+    },
+    "body": "{\"messages\": [{\"role\": \"user\", \"content\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}]}",
+    "isBase64Encoded": false
+  },
+  "limitReached": {
+    "version": "2.0",
+    "routeKey": "$default",
+    "rawPath": "/",
+    "rawQueryString": "",
+    "headers": {
+      "origin": "https://vatsan1305-hub.github.io",
+      "content-type": "application/json",
+      "x-demo-passcode": "REPLACE_WITH_YOUR_DEMO_PASSCODE"
+    },
+    "requestContext": {
+      "http": {
+        "method": "POST",
+        "path": "/",
+        "protocol": "HTTP/1.1",
+        "sourceIp": "203.0.113.1",
+        "userAgent": "test"
+      }
+    },
+    "body": "{\"messages\": [{\"role\": \"user\", \"content\": \"Message 1\"}, {\"role\": \"assistant\", \"content\": \"Reply 1\"}, {\"role\": \"user\", \"content\": \"Message 2\"}, {\"role\": \"assistant\", \"content\": \"Reply 2\"}, {\"role\": \"user\", \"content\": \"Message 3\"}, {\"role\": \"assistant\", \"content\": \"Reply 3\"}, {\"role\": \"user\", \"content\": \"Message 4\"}, {\"role\": \"assistant\", \"content\": \"Reply 4\"}, {\"role\": \"user\", \"content\": \"Message 5\"}, {\"role\": \"assistant\", \"content\": \"Reply 5\"}, {\"role\": \"user\", \"content\": \"Message 6\"}, {\"role\": \"assistant\", \"content\": \"Reply 6\"}, {\"role\": \"user\", \"content\": \"Message 7\"}, {\"role\": \"assistant\", \"content\": \"Reply 7\"}, {\"role\": \"user\", \"content\": \"Message 8\"}, {\"role\": \"assistant\", \"content\": \"Reply 8\"}, {\"role\": \"user\", \"content\": \"Message 9\"}, {\"role\": \"assistant\", \"content\": \"Reply 9\"}, {\"role\": \"user\", \"content\": \"Message 10\"}, {\"role\": \"assistant\", \"content\": \"Reply 10\"}, {\"role\": \"user\", \"content\": \"Message 11\"}]}",
+    "isBase64Encoded": false
+  }
+}

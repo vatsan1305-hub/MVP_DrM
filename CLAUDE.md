@@ -13,6 +13,18 @@ Read this before changing anything. These rules apply to every session.
 - FAQ JSON-LD is generated from the same arrays as the visible FAQ — keep it that way so
   the text always matches exactly.
 
+## Companion (AI demo at /companion/)
+- `guardrails.md` is the source of truth for the Companion's system prompt and safety rules.
+  Any change to it must be mirrored into `lambda/index.mjs` in the same PR
+  (`npm run sync:guardrails`; `npm run check:guardrails` must pass).
+- Companion page copy lives in `content.md` §3 like all other copy; the backend's fixed
+  messages (incl. the crisis reply) are listed in §3.8 and mirrored in `lambda/index.mjs`.
+- Never commit an API key or passcode. `grep -rE "sk-(ant)" --exclude-dir=node_modules .` must
+  return nothing. The Lambda sets no CORS headers (the Function URL config does).
+- The crisis keyword check runs in code before the model is called — never remove it.
+- The conversation lives only in React state: no localStorage, no analytics, no third-party
+  scripts on /companion/.
+
 ## Health-category rules
 - No clinical claims or promised outcomes.
 - No patient identifiers, stories or case details.
