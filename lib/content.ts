@@ -120,7 +120,7 @@ export const home = {
   },
   recognition: {
     h2: "Recognised for work in health & wellness",
-    // [CONFIRM wording] — content.md §4.2
+    // [CONFIRM wording] — content.md §5.2
     caption:
       "Zee Telugu News Achievers Award 2025, Health & Wellness — presented by former Vice President of India Shri M. Venkaiah Naidu.",
     image: images.award,
@@ -210,7 +210,7 @@ export const shelf = {
   faq: [
     {
       q: "Where can I buy Dr. Madhurima's books?",
-      // [CONFIRM formats] — content.md §4.3
+      // [CONFIRM formats] — content.md §5.3
       a: "Both books are available on Amazon India, in print and Kindle editions.",
     },
     {
@@ -222,4 +222,79 @@ export const shelf = {
       a: "Yes. Emotional Mastery themes run through her workshops for organisations, colleges and community groups.",
     },
   ] satisfies Faq[],
+};
+
+// §3 Companion (demo)
+export const companion = {
+  seo: {
+    title: "La Winspire Companion (Demo) | La Winspire",
+    description:
+      "An AI companion for reflection, offered by La Winspire. A private demo — not therapy and not emergency support.",
+  },
+  title: "La Winspire Companion",
+  setup: {
+    body: "Companion is being set up. Please check back soon.",
+    link: "Book a consultation ›",
+  },
+  gate: {
+    description: "An AI companion for reflection, offered by La Winspire.",
+    label: "Passcode",
+    button: "Enter",
+    checking: "Checking…",
+    wrong: "That passcode didn't work. Please check it and try again.",
+    unreachable: "We couldn't reach the Companion. Please try again in a moment.",
+  },
+  consent: {
+    h2: "Before you begin",
+    intro: "Please confirm each of these.",
+    statements: [
+      "I understand this is an AI, not a therapist or Dr. Madhurima",
+      "This is not therapy or emergency support",
+      "I am 18 or older",
+    ],
+    crisis: "In crisis? Call Tele-MANAS 14416 or emergency 112.",
+    button: "Continue",
+  },
+  chat: {
+    badge: "AI · Demo",
+    /** "{n} of {max} messages left" */
+    counter: (n: number, max: number) => `${n} of ${max} messages left`,
+    greeting: "What would you like to reflect on today?",
+    greetingSub: "Write in your own words, or start with one of these.",
+    chips: [
+      "We keep having the same argument",
+      "I'm nervous about getting married",
+      "I feel distant from my partner",
+    ],
+    inputLabel: "Your message",
+    placeholder: "Write what's on your mind…",
+    send: "Send",
+    hint: "Enter to send · Shift + Enter for a new line",
+    /** "{n} / 1,000" */
+    charCount: (n: number) => `${n.toLocaleString("en-IN")} / 1,000`,
+    tooLong: "Please keep your message under 1,000 characters.",
+    thinking: "Reflecting…",
+    conversation: "Conversation",
+    you: "You said",
+    them: "Companion said",
+    error: "The Companion couldn't respond just now.",
+    retry: "Try again",
+  },
+  crisis: {
+    heading: "Support is available now",
+    teleManas: "Call Tele-MANAS 14416",
+    emergency: "Call 112",
+  },
+  plan: {
+    h2: "Continue with a La Winspire plan",
+    body: "You've reached the end of this demo conversation.",
+    // [CONFIRM] tile names and descriptions — content.md §5.5
+    tiles: [
+      { name: "Companion Plus", body: "More time to reflect with the Companion.", label: "Coming soon" },
+      { name: "Companion + Sessions", body: "The Companion, alongside sessions with La Winspire.", label: "Coming soon" },
+    ],
+    button: "Book a consultation",
+  },
+  footer:
+    "AI responses may be inaccurate. Not a substitute for professional care. Conversations are not stored by La Winspire.",
 };

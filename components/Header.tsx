@@ -6,15 +6,30 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { asset, nav, primaryCta, site } from "@/lib/site";
 import { btnPrimary, container } from "@/lib/ui";
 
+/** Small "Demo"-style tag after a nav label. */
+function NavTag({ tag }: { tag?: string }) {
+  if (!tag) return null;
+  return (
+    <>
+      {" "}
+      <span className="ml-1 inline-block translate-y-[-0.1em] rounded-full border border-line px-1.5 py-px align-middle text-[0.6875rem] leading-[1.4] font-medium tracking-[0.04em] text-ink-2 uppercase">
+        {tag}
+      </span>
+    </>
+  );
+}
+
 function NavLink({
   href,
   label,
+  tag,
   className,
   onClick,
   current,
 }: {
   href: string;
   label: string;
+  tag?: string;
   className: string;
   onClick?: () => void;
   current?: boolean;
@@ -23,12 +38,14 @@ function NavLink({
     return (
       <a href={href} className={className} onClick={onClick}>
         {label}
+        <NavTag tag={tag} />
       </a>
     );
   }
   return (
     <Link href={href} className={className} onClick={onClick} aria-current={current ? "page" : undefined}>
       {label}
+      <NavTag tag={tag} />
     </Link>
   );
 }
@@ -106,7 +123,9 @@ export default function Header() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  const isCurrent = (href: string) => href === pathname || (href !== "/" && pathname.startsWith(href));
+  const trim = (p: string) => (p.length > 1 ? p.replace(/\/$/, "") : p);
+  const isCurrent = (href: string) =>
+    trim(href) === trim(pathname) || (href !== "/" && trim(pathname).startsWith(trim(href)));
 
   return (
     <header className="sticky top-0 z-40">

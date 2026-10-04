@@ -30,6 +30,10 @@ export default function MobileCtaBar() {
     return () => io.disconnect();
   }, [pathname]);
 
+  // Hidden on the Companion page, where it would cover the message input.
+  // (globals.css drops the matching body padding there via [data-companion].)
+  if (pathname.startsWith("/companion")) return null;
+
   return (
     <nav
       aria-label="Book a consultation"

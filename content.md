@@ -21,6 +21,7 @@ Items marked **[CONFIRM]** need Dr M's sign-off before any public launch.
 ### Navigation
 - Home
 - Author's Shelf
+- Companion (tag: Demo)
 - Contact (jumps to footer)
 
 ### Primary CTA (site-wide)
@@ -168,11 +169,105 @@ Items marked **[CONFIRM]** need Dr M's sign-off before any public launch.
 
 ---
 
-## 3. Schema notes (for the build)
+## 3. Companion (demo)
+
+An AI chat demo at `/companion/`. The AI runs in a separate AWS Lambda (`lambda/`); its
+rules live in `guardrails.md`. No claims, no statistics, no prices.
+
+### SEO
+- Title: La Winspire Companion (Demo) | La Winspire
+- Meta description: An AI companion for reflection, offered by La Winspire. A private demo — not therapy and not emergency support.
+
+### Navigation
+- Label: Companion
+- Tag: Demo
+
+### 3.1 Being set up (shown until the Lambda URL is added)
+- H1: **La Winspire Companion**
+- Body: Companion is being set up. Please check back soon.
+- Link: Book a consultation ›
+
+### 3.2 Gate
+- H1: **La Winspire Companion**
+- Description: An AI companion for reflection, offered by La Winspire.
+- Field label: Passcode
+- Button: Enter
+- Button while checking: Checking…
+- Error (wrong passcode): That passcode didn't work. Please check it and try again.
+- Error (can't connect): We couldn't reach the Companion. Please try again in a moment.
+
+### 3.3 Consent (once per session)
+- H2: Before you begin
+- Intro: Please confirm each of these.
+- Statements (all three must be ticked):
+  1. I understand this is an AI, not a therapist or Dr. Madhurima
+  2. This is not therapy or emergency support
+  3. I am 18 or older
+- Crisis line: In crisis? Call Tele-MANAS 14416 or emergency 112.
+- Button: Continue
+
+### 3.4 Chat
+- Header: La Winspire Companion
+- Badge: AI · Demo
+- Counter: {n} of {max} messages left
+- Greeting: What would you like to reflect on today?
+- Greeting sub: Write in your own words, or start with one of these.
+- Suggestion chips:
+  - We keep having the same argument
+  - I'm nervous about getting married
+  - I feel distant from my partner
+- Input label: Your message
+- Input placeholder: Write what's on your mind…
+- Send button: Send
+- Keyboard hint (desktop): Enter to send · Shift + Enter for a new line
+- Character counter: {n} / 1,000
+- Too long: Please keep your message under 1,000 characters.
+- Thinking: Reflecting…
+- Screen-reader labels: Conversation · You said · Companion said
+- Error: The Companion couldn't respond just now.
+- Error button: Try again
+
+### 3.5 Crisis card
+- Heading: Support is available now
+- Buttons: Call Tele-MANAS 14416 · Call 112
+- Body: the fixed crisis message from §3.8
+
+### 3.6 Limit reached — plan card (mockup)
+- H2: Continue with a La Winspire plan
+- Body: You've reached the end of this demo conversation.
+- Tiles **[CONFIRM]**:
+  - **Companion Plus** — More time to reflect with the Companion. — Coming soon
+  - **Companion + Sessions** — The Companion, alongside sessions with La Winspire. — Coming soon
+- Button: Book a consultation
+
+### 3.7 Page footer line
+- AI responses may be inaccurate. Not a substitute for professional care. Conversations are not stored by La Winspire.
+
+### 3.8 Backend messages (mirrored in `lambda/index.mjs`)
+- Wrong origin: This demo can only be used from the La Winspire website.
+- Wrong passcode: That passcode didn't work. Please check it and try again.
+- Bad request: Something about that message didn't come through. Please try again.
+- Too long: That message is a little long. Please keep it under 1,000 characters and try again.
+- Error: The Companion couldn't respond just now. Please take a breath and try again in a moment.
+- Crisis reply **[CONFIRM — Dr M to review, with the crisis keyword list]**:
+  > I'm really sorry you're feeling this way. What you're carrying sounds very heavy, and you don't have to hold it alone.
+  >
+  > Please talk to someone right now. You can call Tele-MANAS on 14416 or 1-800-891-4416 — it's free, open 24×7, and available in many Indian languages. If you are in immediate danger, call emergency services on 112.
+  >
+  > If you can, reach out to someone you trust — a friend, a family member, or someone nearby — and let them know how you're feeling.
+  >
+  > Are you safe at this moment?
+
+---
+
+## 4. Schema notes (for the build)
 - Home: Organization + ProfessionalService (NAP above) + Person (Dr M) + FAQPage
 - Author's Shelf: Person + Book ×2 (name, author, url = Amazon link) + FAQPage
+- Companion: none (demo page)
 
-## 4. Open [CONFIRM] items for Dr M
+## 5. Open [CONFIRM] items for Dr M
 1. Phone number is on WhatsApp
 2. Award wording (category + presenter)
 3. Book formats on Amazon (print / Kindle)
+4. Companion crisis reply (§3.8) and the crisis keyword list (`CRISIS_KEYWORDS` in `lambda/index.mjs`)
+5. Companion plan tiles (§3.6) — names and one-line descriptions
