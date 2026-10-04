@@ -9,14 +9,14 @@ import "./globals.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   variable: "--font-fraunces",
   display: "swap",
 });
 
 const figtree = Figtree({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
   variable: "--font-figtree",
   display: "swap",
 });

@@ -9,7 +9,8 @@ type Props = {
 
 /**
  * Plain <img> with intrinsic width/height (no layout shift) and the
- * base path applied. Lazy by default; pass `priority` for the hero only.
+ * base path applied. Capped at its native pixel width so a photo is never
+ * upscaled. Lazy by default; pass `priority` for the hero only.
  */
 export default function Img({ image, className = "", priority = false }: Props) {
   return (
@@ -22,6 +23,7 @@ export default function Img({ image, className = "", priority = false }: Props) 
       loading={priority ? "eager" : "lazy"}
       decoding={priority ? "sync" : "async"}
       fetchPriority={priority ? "high" : undefined}
+      style={{ maxWidth: `${image.width}px` }}
       className={`block h-auto w-full ${className}`}
     />
   );

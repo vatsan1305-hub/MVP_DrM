@@ -3,11 +3,16 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-/** Adds `is-visible` to [data-reveal] elements as they enter the viewport. */
+/**
+ * Fallback for browsers without CSS scroll-driven animations: adds
+ * `is-visible` to [data-reveal] elements as they enter the viewport.
+ * Where `animation-timeline: view()` is supported, CSS does the work.
+ */
 export default function Reveal() {
   const pathname = usePathname();
 
   useEffect(() => {
+    if (CSS.supports?.("animation-timeline: view()")) return;
     const els = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible)"));
     if (!("IntersectionObserver" in window)) {
       els.forEach((el) => el.classList.add("is-visible"));
@@ -22,7 +27,7 @@ export default function Reveal() {
           }
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 },
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();

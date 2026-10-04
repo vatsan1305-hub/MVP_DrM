@@ -1,14 +1,40 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { contact } from "@/lib/site";
 
 const item =
   "flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[0.9375rem] font-medium text-ink transition-colors duration-150 ease-out hover:text-accent";
 
-/** Sticky bottom CTA bar — mobile only. Pure links, no JS. */
+/**
+ * Sticky bottom CTA bar — mobile only. Stays out of the way until the page's
+ * hero ([data-hero]) has scrolled past, so it never covers the first screen.
+ * Without JS it is simply always shown (the hiding rule needs html.js).
+ * The body carries matching bottom padding so it never covers content.
+ */
 export default function MobileCtaBar() {
+  const pathname = usePathname();
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    const hero = document.querySelector("[data-hero]");
+    if (!hero || !("IntersectionObserver" in window)) {
+      setShown(true);
+      return;
+    }
+    const io = new IntersectionObserver(([entry]) => {
+      setShown(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+    });
+    io.observe(hero);
+    return () => io.disconnect();
+  }, [pathname]);
+
   return (
     <nav
       aria-label="Book a consultation"
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
+      data-shown={shown}
+      className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface/90 pb-[env(safe-area-inset-bottom)] backdrop-blur-[20px] backdrop-saturate-[1.8] md:hidden cta-bar"
     >
       <ul className="flex divide-x divide-line">
         <li className="flex flex-1">
